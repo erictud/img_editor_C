@@ -2,3 +2,5 @@ A-Cat.ppm
 makefile
 main
 *.ppm
+img_ex/*
+*.txt
