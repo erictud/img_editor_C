@@ -3,11 +3,12 @@
 #include <string.h>
 
 // custom headers
-#include "utils.h"
-#include "img_io.h"
-#include "img_editing_opt_ASCII.h"
-#include "img_editing_opt_bw.h"
-#include "app_menu.h"
+#include "./headers/utils.h"
+#include "./headers/img_io.h"
+#include "./headers/img_editing_opt_ASCII.h"
+#include "./headers/img_editing_opt_bw.h"
+#include "./headers/img_editing_opt_invert.h"
+#include "./headers/app_menu.h"
 
 
 int main(int argc, char **argv){
@@ -29,7 +30,7 @@ int main(int argc, char **argv){
         }else if(opt == '2'){
             opt2(argv[1], img, w_img, h_img);
         }else if(opt == '3'){
-
+            opt3(argv[1], img, w_img, h_img);
         }else if(opt == '4'){
             printf("Thank you for using the app!\n");
             return 0; 

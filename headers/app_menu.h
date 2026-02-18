@@ -66,9 +66,18 @@ void opt2(char *img_name, int **img, int w_img, int h_img){
         printf("Unexpected error! Please try again!\n");
         return;
     }
-    printf("Succes! The text file with the ASCII art is %s \n", res_img_name);
+    printf("Succes! The black and white image is %s \n", res_img_name);
 }
 
-void opt3(){
+void opt3(char *img_name, int **img, int w_img, int h_img){
+// builds the result text file name (<name>_res.ppm)
+    char *res_img_name = buildFileResName(img_name, "ppm");
 
+    printf("Loading....\n");
+    int res = invertImg(res_img_name, img, w_img, h_img);
+    if(res == 0){
+        printf("Unexpected error! Please try again!\n");
+        return;
+    }
+    printf("Succes! The inverted color image is %s \n", res_img_name);
 }
