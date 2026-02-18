@@ -1,13 +1,17 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include <math.h>
+
+// custom headers
+#include "utils.h"
 #include "img_io.h"
 #include "img_editing_opt.h"
+#include "app_menu.h"
 
 
 int main(int argc, char **argv){
-    int w_img, h_img, **img;
+    int w_img, h_img, **img, print_long = 1;
+    char opt;
 // Reading image
     img = read_img(argv[1], &w_img, &h_img);
     if(img == NULL){
@@ -15,17 +19,27 @@ int main(int argc, char **argv){
         return -1;
     }
 
-// Writing image
-    // builds the result image file name (<name>_res.ppm)
-    int l_img_name = strlen(argv[1]);
-    char *res_img_name = (char *)malloc(l_img_name + 5);
+    printWelcomeMessage();
+    while(1){
+        printOptionMenu(&opt, print_long);
+        print_long = 0;
+        if(opt == '1'){
+            opt1(argv[1], img, w_img, h_img);
+        }else if(opt == '2'){
 
-    // copies just the name of the file without the .ppm extension
-    strcpy(res_img_name, strtok(argv[1], "."));
-    strcat(res_img_name, "_res");
-    res_img_name[l_img_name + 4] = '\0';
-   
-    transformAscii(res_img_name, img, w_img, h_img);
+        }else if(opt == '3'){
+
+        }else if(opt == '4'){
+            printf("Thank you for using the app!\n");
+            return 0; 
+        }else{
+            print_long = 1;
+            printf("It seems that option %c doesnt exist!\nChoose a valid option!\n", opt);
+        }
+    }
+
+// Writing image
+    
 
     // int w = write_img(res_img_name, img, w_img, h_img);
     // if(w == 0){
