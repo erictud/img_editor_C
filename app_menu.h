@@ -46,6 +46,7 @@ void printOptionMenu(char *opt, int print_long){
 void opt1(char *img_name, int **img, int w_img, int h_img){
     // builds the result text file name (<name>_res.txt)
     char *res_img_name = buildFileResName(img_name, "txt");
+
     printf("Loading....\n");
     int res = transformAscii(res_img_name, img, w_img, h_img);
     if(res == 0){
@@ -55,8 +56,17 @@ void opt1(char *img_name, int **img, int w_img, int h_img){
     printf("Succes! The text file with the ASCII art is %s \n", res_img_name);
 }
 
-void opt2(){
+void opt2(char *img_name, int **img, int w_img, int h_img){
+    // builds the result text file name (<name>_res.ppm)
+    char *res_img_name = buildFileResName(img_name, "ppm");
 
+    printf("Loading....\n");
+    int res = transformBlachWhite(res_img_name, img, w_img, h_img);
+    if(res == 0){
+        printf("Unexpected error! Please try again!\n");
+        return;
+    }
+    printf("Succes! The text file with the ASCII art is %s \n", res_img_name);
 }
 
 void opt3(){

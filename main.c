@@ -5,7 +5,8 @@
 // custom headers
 #include "utils.h"
 #include "img_io.h"
-#include "img_editing_opt.h"
+#include "img_editing_opt_ASCII.h"
+#include "img_editing_opt_bw.h"
 #include "app_menu.h"
 
 
@@ -26,7 +27,7 @@ int main(int argc, char **argv){
         if(opt == '1'){
             opt1(argv[1], img, w_img, h_img);
         }else if(opt == '2'){
-
+            opt2(argv[1], img, w_img, h_img);
         }else if(opt == '3'){
 
         }else if(opt == '4'){
