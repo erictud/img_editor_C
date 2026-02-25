@@ -1,3 +1,8 @@
+#include "img_io.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
 // returns the matrix of the pixels, along with width and height by using the w and h parameters
 int** read_img(char *f_name, int *w, int *h){
     char buff[1000];

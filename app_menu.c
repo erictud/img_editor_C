@@ -1,3 +1,10 @@
+#include "app_menu.h"
+#include "img_editing_opt.h"
+#include "utils.h"
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
 // menu options
 char option_1[] = "[1] Transform image to ASCII art\n";
 char option_2[] = "[2] Create balck and white image\n";
@@ -61,7 +68,7 @@ void opt2(char *img_name, int **img, int w_img, int h_img){
     char *res_img_name = buildFileResName(img_name, "ppm");
 
     printf("Loading....\n");
-    int res = transformBlachWhite(res_img_name, img, w_img, h_img);
+    int res = transformImage(res_img_name, img, w_img, h_img, applyTransformationBW);
     if(res == 0){
         printf("Unexpected error! Please try again!\n");
         return;
@@ -74,7 +81,7 @@ void opt3(char *img_name, int **img, int w_img, int h_img){
     char *res_img_name = buildFileResName(img_name, "ppm");
 
     printf("Loading....\n");
-    int res = invertImg(res_img_name, img, w_img, h_img);
+    int res = transformImage(res_img_name, img, w_img, h_img, applyTransformationInvert);
     if(res == 0){
         printf("Unexpected error! Please try again!\n");
         return;

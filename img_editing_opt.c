@@ -1,3 +1,8 @@
+# include "img_editing_opt.h"
+#include <stdlib.h>
+#include <stdio.h>
+// OPT1 - ASCII Art generator
+
 // Basic resizing algorithm, makes an image smaller
 int **resizeImg(int w, int h, int **img, int *new_w, int *new_h){    
     // determining a new size that keeps the w/h ratio
@@ -70,5 +75,22 @@ int transformAscii(char *nume_fis, int **img, int w, int h){
     for(int i = 0; i < new_h; i++)
         free(new_img[i]);
     free(new_img);
+}
+
+// OPT 2 - Black and white filter
+
+void applyTransformationBW(int **img, int **new_img, int i, int j){
+    float grey = 0.29 * img[i][j*3] + 0.58 * img[i][j*3+1] + 0.11 * img[i][j*3+2];
+    new_img[i][j*3] = (int)grey;
+    new_img[i][j*3+1] = (int)grey;
+    new_img[i][j*3+2] = (int)grey;
+}
+
+// OPT 3 - Invert image colors 
+
+void applyTransformationInvert(int **img, int **new_img, int i, int j){
+    new_img[i][j*3] = 255 - img[i][j*3];
+    new_img[i][j*3+1] = 255 - img[i][j*3+1];
+    new_img[i][j*3+2] = 255 - img[i][j*3+2];
 }
 

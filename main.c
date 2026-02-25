@@ -3,12 +3,10 @@
 #include <string.h>
 
 // custom headers
-#include "./headers/utils.h"
-#include "./headers/img_io.h"
-#include "./headers/img_editing_opt_ASCII.h"
-#include "./headers/img_editing_opt_bw.h"
-#include "./headers/img_editing_opt_invert.h"
-#include "./headers/app_menu.h"
+#include "utils.h"
+#include "img_io.h"
+#include "img_editing_opt.h"
+#include "app_menu.h"
 
 
 int main(int argc, char **argv){
