@@ -1,6 +1,6 @@
-# include "img_editing_opt.h"
 #include <stdlib.h>
 #include <stdio.h>
+# include "img_editing_opt.h"
 // OPT1 - ASCII Art generator
 
 // Basic resizing algorithm, makes an image smaller
@@ -94,3 +94,20 @@ void applyTransformationInvert(int **img, int **new_img, int i, int j){
     new_img[i][j*3+2] = 255 - img[i][j*3+2];
 }
 
+// OPT 4 - Color filter
+void applyTransformationFilterRed(int **img, int **new_img, int i, int j){
+    new_img[i][j*3] = img[i][j*3];
+    new_img[i][j*3+1] = 0;
+    new_img[i][j*3+2] = 0;
+}
+
+void applyTransformationFilterGreen(int **img, int **new_img, int i, int j){
+    new_img[i][j*3] = 0;
+    new_img[i][j*3+1] = img[i][j*3+1];
+    new_img[i][j*3+2] = 0;
+}
+void applyTransformationFilterBlue(int **img, int **new_img, int i, int j){
+    new_img[i][j*3] = 0;
+    new_img[i][j*3+1] = 0;
+    new_img[i][j*3+2] = img[i][j*3+2];
+}

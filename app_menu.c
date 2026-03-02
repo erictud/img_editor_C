@@ -6,11 +6,11 @@
 #include <stdlib.h>
 
 // menu options
-char option_1[] = "[1] Transform image to ASCII art\n";
-char option_2[] = "[2] Create balck and white image\n";
-char option_3[] = "[3] Invert image colors\n";
-char option_4[] = "[4] Exit app\n";
+char options[][30] = {"Transform image to ASCII art", 
+                    "Create balck and white image", "Invert image colors", 
+                    "Apply color filter", "Exit app"};
 int pad_left = 5;
+int options_num = 5;
 
 void printWelcomeMessage(){
     printf("%s", "(C) Tudorica Eric feb. 2026\n");
@@ -19,23 +19,21 @@ void printWelcomeMessage(){
     printf("%s", "|  |_> >  |_> >  Y Y  \\ \n");
     printf("%s", "|   __/|   __/|__|_|  / \n");
     printf("%s", "|__|   |__|         \\/ \n");
-    printf("%s", "PPM image editor. Choose what to do:\n");
+    printf("%s", "PPM image editor. Choose what to do:\n\n");
 
 }                   
 
 void printOptionMenu(char *opt, int print_long){
-    // determine padding for each option
-    int pad_left_opt1 = strlen(option_1) + pad_left;
-    int pad_left_opt2 = strlen(option_2) + pad_left;
-    int pad_left_opt3 = strlen(option_3) + pad_left;
-    int pad_left_opt4 = strlen(option_4) + pad_left;
-
-    // printing menu
+    // printing menu options
+    for(int i = 0; i < options_num; i++){
+        // determine padding for each option
+        int pad_left_opt = strlen(options[i]) + pad_left;
+        if(print_long){
+            printf("[%d]%*s\n", i+1, pad_left_opt, options[i]);
+        }
+    }
+    // determining wheter we print all the options again
     if(print_long){
-        printf("%*s", pad_left_opt1, option_1);
-        printf("%*s", pad_left_opt2, option_2);
-        printf("%*s", pad_left_opt3, option_3);        
-        printf("%*s", pad_left_opt4, option_4);
         printf("%*s", 15, "Choose option: ");
     }else{
         printf("%*s", 23, "Choose another option: ");
@@ -49,7 +47,7 @@ void printOptionMenu(char *opt, int print_long){
     *opt = ch;    
 }
 
-// TRANSFORM IMG TO ASCII ART
+// Opt 1 - Transforming image to ASCII art
 void opt1(char *img_name, int **img, int w_img, int h_img){
     // builds the result text file name (<name>_res.txt)
     char *res_img_name = buildFileResName(img_name, "txt");
@@ -63,6 +61,7 @@ void opt1(char *img_name, int **img, int w_img, int h_img){
     printf("Succes! The text file with the ASCII art is %s \n", res_img_name);
 }
 
+// Opt 2 - Transforming image to black and white
 void opt2(char *img_name, int **img, int w_img, int h_img){
     // builds the result text file name (<name>_res.ppm)
     char *res_img_name = buildFileResName(img_name, "ppm");
@@ -76,6 +75,7 @@ void opt2(char *img_name, int **img, int w_img, int h_img){
     printf("Succes! The black and white image is %s \n", res_img_name);
 }
 
+// Opt 3 - Inverting color images
 void opt3(char *img_name, int **img, int w_img, int h_img){
 // builds the result text file name (<name>_res.ppm)
     char *res_img_name = buildFileResName(img_name, "ppm");
@@ -87,4 +87,33 @@ void opt3(char *img_name, int **img, int w_img, int h_img){
         return;
     }
     printf("Succes! The inverted color image is %s \n", res_img_name);
+}
+
+// Opt 4 - Applying color filters
+void opt4(char *img_name, int **img, int w_img, int h_img){
+// builds the result text file name (<name>_res.ppm)
+    char *res_img_name = buildFileResName(img_name, "ppm");
+
+    printf("Choose color filter (red - r; green - g; blue - b): ");
+    // make sure that \n or spaces dont count as valid options
+    char filter_option = getchar();
+    while(filter_option == ' ' || filter_option == '\n')
+        filter_option = getchar();
+    
+    int res;
+    if(filter_option == 'r'){
+        res = transformImage(res_img_name, img, w_img, h_img, applyTransformationFilterRed);
+    }else if(filter_option == 'g'){
+        res = transformImage(res_img_name, img, w_img, h_img, applyTransformationFilterGreen);
+    }else if(filter_option == 'b'){
+        res = transformImage(res_img_name, img, w_img, h_img, applyTransformationFilterBlue);
+    }else{
+        printf("Invalid option! Moving back to the main menu...\n");
+    }    
+
+    if(res == 0){
+        printf("Unexpected error! Please try again!\n");
+        return;
+    }
+    printf("Succes! The new image is %s \n", res_img_name);
 }

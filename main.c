@@ -8,6 +8,11 @@
 #include "img_editing_opt.h"
 #include "app_menu.h"
 
+//
+typedef void (*Menu_opt)(char *img_name, int **img, int w_img, int h_img);
+Menu_opt menu_options[] = {
+    opt1, opt2, opt3, opt4
+};
 
 int main(int argc, char **argv){
     int w_img, h_img, **img, print_long = 1;
@@ -23,13 +28,9 @@ int main(int argc, char **argv){
     while(1){
         printOptionMenu(&opt, print_long);
         print_long = 0;
-        if(opt == '1'){
-            opt1(argv[1], img, w_img, h_img);
-        }else if(opt == '2'){
-            opt2(argv[1], img, w_img, h_img);
-        }else if(opt == '3'){
-            opt3(argv[1], img, w_img, h_img);
-        }else if(opt == '4'){
+        if(opt >= '1' && opt <= '4'){
+            menu_options[(opt- '0') - 1](argv[1], img, w_img, h_img);
+        }else if(opt == '5'){
             printf("Thank you for using the app!\n");
             return 0; 
         }else{
@@ -37,13 +38,4 @@ int main(int argc, char **argv){
             printf("It seems that option %c doesnt exist!\nChoose a valid option!\n", opt);
         }
     }
-
-// Writing image
-    
-
-    // int w = write_img(res_img_name, img, w_img, h_img);
-    // if(w == 0){
-    //     printf("Unexpected error while reading! Check image compatibility and try again!\n");
-    //     return -1;
-    // }
 }

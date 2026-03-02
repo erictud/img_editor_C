@@ -11,4 +11,9 @@ void applyTransformationBW(int **img, int **new_img, int i, int j);
 // OPT 3 - Invert image colors 
 void applyTransformationInvert(int **img, int **new_img, int i, int j);
 
+// OPT 4 - Color filter
+void applyTransformationFilterRed(int **img, int **new_img, int i, int j);
+void applyTransformationFilterGreen(int **img, int **new_img, int i, int j);
+void applyTransformationFilterBlue(int **img, int **new_img, int i, int j);
+
 #endif // IMG_EDITING_OPT_H
